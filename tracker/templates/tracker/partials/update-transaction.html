@@ -1,0 +1,21 @@
+{% load widget_tweaks %}
+
+<h1 class="mt-8 mb-4 prose prose-2xl text-white"> 
+    Update Transaction
+</h1>
+
+<form hx-post="{% url 'update-transaction' transaction.pk %}" method="POST">
+    {% csrf_token %} <!-- Add CSRF token for security --> 
+
+    {% include 'tracker/partials/transaction-form.html' %}
+
+    <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        Update
+    </button>
+    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" 
+        hx-get="{% url 'transactions-list' %}" 
+        hx-target="#transaction-block"
+        hx-push-url='/transactions'>
+        Cancle
+    </button>
+</form>
